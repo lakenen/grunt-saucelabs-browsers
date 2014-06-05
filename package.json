@@ -1,0 +1,44 @@
+{
+  "name": "grunt-saucelabs-browsers",
+  "description": "Request SauceLabs supported plattforms",
+  "version": "0.0.0",
+  "homepage": "https://github.com/lakenen/grunt-saucelabs-browsers",
+  "author": {
+    "name": "Cameron Lakenen",
+    "email": "lakenen@box.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:lakenen/grunt-saucelabs-browsers.git"
+  },
+  "bugs": {
+    "url": "https://github.com/lakenen/grunt-saucelabs-browsers/issues"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/lakenen/grunt-saucelabs-browsers/blob/master/LICENSE"
+    }
+  ],
+  "engines": {
+    "node": ">= 0.8.0"
+  },
+  "scripts": {
+    "test": "grunt test"
+  },
+  "devDependencies": {
+    "grunt-contrib-jshint": "^0.9.2",
+    "grunt-contrib-clean": "^0.5.0",
+    "grunt-contrib-nodeunit": "^0.3.3",
+    "grunt": "~0.4.5",
+    "request": "^2.36.0",
+    "lodash": "^2.4.1"
+  },
+  "peerDependencies": {
+    "grunt": "~0.4.5"
+  },
+  "keywords": [
+    "gruntplugin",
+    "saucelabs"
+  ]
+}
