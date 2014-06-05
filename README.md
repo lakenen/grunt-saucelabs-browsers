@@ -44,7 +44,7 @@ A url for requesting the list of browsers.
 Type: `Function`
 Default value: `function () {}`
 
-A function to receive (and do something with) the list of available platforms.
+A function to receive (and do something with) the list of available platforms. Return a set of browsers you wish to have included in grunt.config.
 
 #### options.transform
 Type: `Function`
@@ -55,7 +55,7 @@ A function to transform the raw API response data into something easier to work 
 ### Usage Examples
 
 #### Default Options
-In this example, the default options are used to get all the browsers. They are then set on the 'saucelabs-browsers' grunt config.
+In this example, the default options are used to get all the browsers. They are then set on the `saucelabs.browsers` grunt config.
 
 ```js
 grunt.initConfig({
@@ -73,10 +73,9 @@ grunt.initConfig({
   'saucelabs-browsers': {
     options: {
       callback: function (browsers) {
-        browsers = browsers.filter(function (browser) {
+        return browsers.filter(function (browser) {
           return /chrome/i.test(browser.browserName);
         });
-        grunt.config.set('saucelabs-browsers', browsers);
       }
     }
   },

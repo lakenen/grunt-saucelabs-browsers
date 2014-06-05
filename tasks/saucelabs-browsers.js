@@ -28,7 +28,7 @@ module.exports = function(grunt) {
         url: 'https://saucelabs.com/rest/v1/info/browsers/all',
         callback: function (err, browsers) {
           // just set the browsers on the grunt config by default
-          grunt.config.set('saucelabs-browsers', browsers);
+          return browsers;
         },
         transform: defaultTransform
       }),
@@ -54,7 +54,7 @@ module.exports = function(grunt) {
       } else {
         browsers = JSON.parse(body);
         grunt.log.ok(browsers.length + ' browsers found');
-        callback(error, browsers.map(transform));
+        grunt.config('saucelabs.browsers', callback(error, browsers.map(transform)));
       }
       done(error);
     }
