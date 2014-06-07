@@ -22,22 +22,22 @@ module.exports = function(grunt) {
     };
   }
 
-  grunt.registerTask('saucelabs-browsers', 'Request SauceLabs supported browsers', function() {
+  grunt.registerMultiTask('saucelabs-browsers', 'Request SauceLabs supported browsers', function() {
 
     var options = this.options({
         url: 'https://saucelabs.com/rest/v1/info/browsers/all',
-        callback: function (err, browsers) {
+        filter: function (browsers) {
           // just set the browsers on the grunt config by default
           return browsers;
         },
         transform: defaultTransform
       }),
-      callback = options.callback,
+      filter = options.filter,
       transform = options.transform,
       done = this.async();
 
-    if (!callback || typeof callback !== 'function') {
-      throw new Error('`callback` option must be a function');
+    if (!filter || typeof filter !== 'function') {
+      throw new Error('`filter` option must be a function');
     }
 
     function responseHandler(error, response, body) {
@@ -53,8 +53,10 @@ module.exports = function(grunt) {
         grunt.fail.fatal(error);
       } else {
         browsers = JSON.parse(body);
-        grunt.log.ok(browsers.length + ' browsers found');
-        grunt.config('saucelabs.browsers', callback(error, browsers.map(transform)));
+        grunt.log.ok(browsers.length + ' total browser(s)');
+        browsers = filter(browsers.map(transform));
+        grunt.log.ok('filtered to ' + browsers.length + ' browser(s)');
+        grunt.config('saucelabs.browsers', browsers);
       }
       done(error);
     }

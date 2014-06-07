@@ -23,14 +23,14 @@ var grunt = require('grunt');
 */
 
 exports['saucelabs-browsers'] = {
-  setUp: function(done) {
+  setUp: function (done) {
     // setup here if necessary
     done();
   },
-  default: function(test) {
+  all: function (test) {
     test.expect(1);
 
-    test.ok(grunt.config.get('saucelabs-browsers').length > 0, 'should set saucelabs-browsers property on config');
+    test.ok(grunt.config.get('saucelabs.browsers').length > 0, 'should set saucelabs.browsers property on config');
 
     test.done();
   }

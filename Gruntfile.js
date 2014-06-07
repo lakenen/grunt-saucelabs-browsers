@@ -30,7 +30,18 @@ module.exports = function(grunt) {
 
     // Configuration to be run (and then tested).
     'saucelabs-browsers': {
-      options: {}
+      all: {
+        options: {}
+      },
+      chrome: {
+        options: {
+          filter: function (browsers) {
+            return browsers.filter(function (b) {
+              return /chrome/i.test(b.browserName);
+            });
+          }
+        }
+      }
     },
 
     // Unit tests.
@@ -50,7 +61,7 @@ module.exports = function(grunt) {
 
   // Whenever the "test" task is run, first clean the "tmp" dir, then run this
   // plugin's task(s), then test the result.
-  grunt.registerTask('test', ['clean', 'saucelabs-browsers', 'nodeunit']);
+  grunt.registerTask('test', ['clean', 'saucelabs-browsers:all', 'nodeunit']);
 
   // By default, lint and run all tests.
   grunt.registerTask('default', ['jshint', 'test']);

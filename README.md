@@ -40,11 +40,11 @@ Default value: `https://saucelabs.com/rest/v1/info/browsers/webdriver`
 
 A url for requesting the list of browsers.
 
-#### options.callback
+#### options.filter
 Type: `Function`
 Default value: `function () {}`
 
-A function to receive (and do something with) the list of available platforms. Return a set of browsers you wish to have included in grunt.config.
+A function to filter the list of available platforms. Return a set of browsers you wish to have included in `grunt.config('saucelabs.browsers')`.
 
 #### options.transform
 Type: `Function`
@@ -60,8 +60,10 @@ In this example, the default options are used to get all the browsers. They are 
 ```js
 grunt.initConfig({
   'saucelabs-browsers': {
-    options: {},
-  },
+    all {
+      options: {}
+    }
+  }
 });
 ```
 
@@ -71,14 +73,39 @@ In this example, we filter to get only chrome browsers.
 ```js
 grunt.initConfig({
   'saucelabs-browsers': {
-    options: {
-      callback: function (browsers) {
-        return browsers.filter(function (browser) {
-          return /chrome/i.test(browser.browserName);
-        });
+    chrome: {
+      options: {
+        filter: function (browsers) {
+          return browsers.filter(function (browser) {
+            return /chrome/i.test(browser.browserName);
+          });
+        }
+      }
+    }
+  }
+});
+```
+
+#### Using With Other Grunt Plugins
+
+```js
+grunt.initConfig({
+  'saucelabs-browsers': {
+    chrome: {
+      options: {
+        filter: function (browsers) {
+          return browsers.filter(function (browser) {
+            return /chrome/i.test(browser.browserName);
+          });
+        }
       }
     }
   },
+  'saucelabs-qunit': {
+    options: {
+      browsers: '<%= saucelabs.browsers %>',
+    }
+  }
 });
 ```
 
