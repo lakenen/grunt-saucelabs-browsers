@@ -60,7 +60,7 @@ In this example, the default options are used to get all the browsers. They are 
 ```js
 grunt.initConfig({
   'saucelabs-browsers': {
-    all {
+    all: {
       options: {}
     }
   }
@@ -114,7 +114,8 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 
 ## Release History
 
-0.0.0 - initial functionality
+- 0.1.0 - use multi task, rename callback -> filter
+- 0.0.0 - initial functionality
 
 
 ## License
