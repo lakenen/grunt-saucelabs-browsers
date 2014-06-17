@@ -36,9 +36,15 @@ grunt.initConfig({
 
 #### options.url
 Type: `String`
-Default value: `https://saucelabs.com/rest/v1/info/browsers/webdriver`
+Default value: `https://saucelabs.com/rest/v1/info/browsers/`
 
-A url for requesting the list of browsers.
+A base url for requesting the list of browsers.
+
+#### options.seleniumVersion
+Type: `String`
+Default value: `all`
+
+A Selenium version to request browsers for. This value is appended to the url when making a request to the SauceLabs API. Possible values: `all`, `selenium-rc`, or `webdriver`.
 
 #### options.filter
 Type: `Function`

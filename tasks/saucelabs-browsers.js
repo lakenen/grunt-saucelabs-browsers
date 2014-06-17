@@ -10,6 +10,8 @@
 
 var request = require('request');
 
+var SELENIUM_VERSIONS = ['all', 'selenium-rc', 'webdriver'];
+
 module.exports = function(grunt) {
 
   function defaultTransform(browser) {
@@ -25,7 +27,8 @@ module.exports = function(grunt) {
   grunt.registerMultiTask('saucelabs-browsers', 'Request SauceLabs supported browsers', function() {
 
     var options = this.options({
-        url: 'https://saucelabs.com/rest/v1/info/browsers/all',
+        url: 'https://saucelabs.com/rest/v1/info/browsers/',
+        seleniumVersion: 'all',
         filter: function (browsers) {
           // just set the browsers on the grunt config by default
           return browsers;
@@ -35,6 +38,10 @@ module.exports = function(grunt) {
       filter = options.filter,
       transform = options.transform,
       done = this.async();
+
+    if (SELENIUM_VERSIONS.indexOf(options.seleniumVersion) === -1) {
+      throw new Error('invalid `seleniumVersion` option ' + options.seleniumVersion);
+    }
 
     if (!filter || typeof filter !== 'function') {
       throw new Error('`filter` option must be a function');
@@ -61,7 +68,7 @@ module.exports = function(grunt) {
       done(error);
     }
 
-    request(options, responseHandler);
+    request.get(options.url + options.seleniumVersion, responseHandler);
   });
 
 };
