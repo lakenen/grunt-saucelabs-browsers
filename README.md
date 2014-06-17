@@ -120,6 +120,7 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 
 ## Release History
 
+- 0.2.0 - add `seleniumVersion` option
 - 0.1.0 - use multi task, rename callback -> filter
 - 0.0.0 - initial functionality
 
